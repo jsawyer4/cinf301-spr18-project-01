@@ -6,13 +6,22 @@ window.onload = function() {
     const table = document.querySelector('table');
     const rows = document.querySelectorAll('tr');
     const rowsArray = Array.from(rows);
+    const tiles = document.querySelectorAll('td');
+    const tilesArray= Array.from(tiles);
+    var solution = ["<td>1</td>","<td>2</td>","<td>3</td>","<td>4</td>","<td>5</td>","<td>6</td>","<td>7</td>","<td>9</td>","<td>8</td>"];
 
     table.addEventListener('click', (event) => {
         const rowIndex = rowsArray.findIndex(row => row.contains(event.target));
     const columns = Array.from(rowsArray[rowIndex].querySelectorAll('td'));
     const columnIndex = columns.findIndex(column => column == event.target);
-    console.log(rowIndex, columnIndex)
+    console.log(rowIndex, columnIndex);
+    console.log(tilesArray[rowIndex*columnIndex]);
+    console.log(solution[rowIndex*columnIndex]);
     switch_elems(rowIndex, columnIndex);
+
+    if(tilesArray==solution) {
+        alert("You won");
+    }
 })
 }
 
