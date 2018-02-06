@@ -7,7 +7,7 @@ window.onload = function() {
     const rows = document.querySelectorAll('tr');
     const rowsArray = Array.from(rows);
     const tiles = document.querySelectorAll('td');
-    // const tilesSolution = starting_elemts(tiles);
+    const tilesSolution =new Array (1,2,3,8,' ',4,7,6,5);
 
     table.addEventListener('click', (event) => {
 
@@ -18,9 +18,8 @@ window.onload = function() {
     var blank;
     for(i=0;i<tiles.length;i++)
     {
-        if(tiles[i].innerHTML==' ')
-        {
-            blank=i+1;
+        if(tiles[i].innerHTML==' ') {
+            blank = i + 1;
         }
     }
     if(rowIndex==1)
@@ -63,9 +62,24 @@ window.onload = function() {
     {
 
     }
-
+    solved(tiles,tilesSolution);
 
 })
+}
+function solved(tiles,sol)
+{
+    var counter=0;
+    for(i=0;i<sol.length;i++)
+    {
+        if(tiles[i].innerHTML==sol[i])
+        {
+            counter++;
+        }
+    }
+    if (counter==9)
+    {
+        alert("you won");
+    }
 }
 function switch_elems(i, j,k,l) {
     const table = document.querySelector('table');
