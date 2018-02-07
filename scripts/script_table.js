@@ -94,7 +94,7 @@ function shuffle_tiles() {
         {
             for(i=0;i<3;i++)
             {
-                switch_elems(j+1,i,((Math.floor(Math.random()*3))+1),(Math.floor((Math.random()*3))));
+                switch_elems(j+1,i,((Math.floor(Math.random()*3)+1)),(Math.floor((Math.random()*3))));
             }
         }
     }
