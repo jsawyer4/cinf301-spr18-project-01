@@ -9,6 +9,8 @@ window.onload = function() {
     const tiles = document.querySelectorAll('td');
     const tilesSolution =new Array (1,2,3,8,' ',4,7,6,5);
 
+    shuffle_tiles();
+
     table.addEventListener('click', (event) => {
 
         const rowIndex = rowsArray.findIndex(row => row.contains(event.target));
@@ -16,52 +18,47 @@ window.onload = function() {
     const columnIndex = columns.findIndex(column => column == event.target);
     console.log(rowIndex, columnIndex);
     var blank;
+    // this checks to see where the blank is in on the board
     for(i=0;i<tiles.length;i++)
     {
         if(tiles[i].innerHTML==' ') {
             blank = i + 1;
         }
     }
+    //this checks to see where you clicked on the board
     if(rowIndex==1)
     {
-        console.log(tiles[(rowIndex+columnIndex)-1].innerHTML)
         O=(rowIndex+columnIndex);
     }
     else if(rowIndex==2)
     {
-        console.log(tiles[(rowIndex+(2+columnIndex))-1].innerHTML);
         O=(rowIndex+(2+columnIndex));
     }
     else
     {
-        console.log(tiles[(rowIndex+(4+columnIndex))-1].innerHTML);
         O=(rowIndex+(4+columnIndex));
     }
-    console.log("O",O,"blank",blank);
+    /*
+        This is where we check to see if you click a spot where a blank can move.
+    */
     if((blank+3)==O)
     {
         switch_elems(rowIndex, columnIndex,(rowIndex-1), columnIndex);
-        console.log("+3");
     }
     else if((blank-3)==O)
     {
         switch_elems(rowIndex, columnIndex,(rowIndex+1),columnIndex);
-        console.log("-3");
     }
     else if((blank-1)==O)
     {
         switch_elems(rowIndex, columnIndex,rowIndex,(columnIndex+1));
-        console.log("-1");
     }
     else if((blank+1)==O)
     {
         switch_elems(rowIndex, columnIndex,rowIndex,(columnIndex-1));
-        console.log("+1");
-    }
-    else
-    {
 
     }
+    // solved checks to see if you won the game
     solved(tiles,tilesSolution);
 
 })
@@ -84,19 +81,24 @@ function solved(tiles,sol)
 function switch_elems(i, j,k,l) {
     const table = document.querySelector('table');
     const val1 = table.rows[i].cells[j].innerHTML;
-    console.log(i,j,k,l)
-/*
-    let k = j + 1;
-    let numRows = table.rows.length; // not used, but this gets num rows
-    if (k > table.rows[i].cells.length - 1) {
-        k = 0;
-    }
-*/
-
     const val2 = table.rows[k].cells[l].innerHTML;
+    console.log(i,j,k,l);
 
     table.rows[i].cells[j].innerHTML = val2.toString();
     table.rows[k].cells[l].innerHTML = val1.toString();
+}
+function shuffle_tiles() {
+    for(k=0;k<3;k++)
+    {
+        for(j=0;j<3;j++)
+        {
+            for(i=0;i<3;i++)
+            {
+                switch_elems(j+1,i,((Math.floor(Math.random()*3))+1),(Math.floor((Math.random()*3))));
+            }
+        }
+    }
+
 }
 
 /*
