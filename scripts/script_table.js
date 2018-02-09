@@ -34,9 +34,13 @@ window.onload = function() {
     {
         O=(rowIndex+(2+columnIndex));
     }
-    else
+    else if(rowIndex==3)
     {
         O=(rowIndex+(4+columnIndex));
+    }
+    else
+    {
+        shuffle_tiles();
     }
     /*
         This is where we check to see if you click a spot where a blank can move.
@@ -88,7 +92,7 @@ function switch_elems(i, j,k,l) {
     table.rows[k].cells[l].innerHTML = val1.toString();
 }
 function shuffle_tiles() {
-    for(k=0;k<3;k++)
+    for(k=0;k<2;k++)
     {
         for(j=0;j<3;j++)
         {
